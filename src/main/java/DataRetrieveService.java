@@ -1,7 +1,3 @@
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,21 +7,22 @@ import java.util.stream.Stream;
 
 
 public class DataRetrieveService {
-    private static Logger LOG = LoggerFactory.getLogger(DataRetrieveService.class);
+    private Path path;
 
-    private static Path path = Path.of("files/sample-data.csv");
+    public DataRetrieveService(Path path) {
+        this.path = Path.of(String.valueOf(path));
+    }
 
-    public static void main(String... args) {
-        try(Stream<String> lines = Files.lines(path)) {
-            List<Competitor> competitorsList = lines
-                    .filter(line -> !line.startsWith("#"))
+    public List<Competitor> getCompetitorsFromCsv() {
+        try (Stream<String> lines = Files.lines(path)) {
+            List<Competitor> competitorList = lines.filter(line -> !line.startsWith("#"))
                     .map(line -> getCompetitor(line))
                     .collect(Collectors.toList());
-            System.out.println(competitorsList);
+             return competitorList;
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        return List.of();
     }
 
     private static Competitor getCompetitor(String line) {
