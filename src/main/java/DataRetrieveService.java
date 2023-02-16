@@ -1,3 +1,7 @@
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -35,4 +39,6 @@ public class DataRetrieveService {
         Competitor competitor = new Competitor(name, surName, age, club, category);
         return competitor;
     }
+    //possible to improve with jackson lib
+    //https://cowtowncoder.medium.com/reading-csv-with-jackson-c4e74a15ddc1
 }
