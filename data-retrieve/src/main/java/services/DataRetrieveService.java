@@ -1,6 +1,6 @@
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
+package services;
+
+import dto.CompetitorDTO;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,27 +17,27 @@ public class DataRetrieveService {
         this.path = Path.of(String.valueOf(path));
     }
 
-    public List<Competitor> getCompetitorsFromCsv() {
+    public List<CompetitorDTO> getCompetitorsFromCsv() {
         try (Stream<String> lines = Files.lines(path)) {
-            List<Competitor> competitorList = lines.filter(line -> !line.startsWith("#"))
+            List<CompetitorDTO> competitorDTOList = lines.filter(line -> !line.startsWith("#"))
                     .map(line -> getCompetitor(line))
                     .collect(Collectors.toList());
-             return competitorList;
+             return competitorDTOList;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return List.of();
     }
 
-    private static Competitor getCompetitor(String line) {
+    private static CompetitorDTO getCompetitor(String line) {
         String[] elements = line.split(";");
         String name = elements[0];
         String surName = elements[1];
         int age = Integer.parseInt(elements[2]);
         String club = elements[3];
         String category = elements[4];
-        Competitor competitor = new Competitor(name, surName, age, club, category);
-        return competitor;
+        CompetitorDTO competitorDTO = new CompetitorDTO(name, surName, age, club, category);
+        return competitorDTO;
     }
     //possible to improve with jackson lib
     //https://cowtowncoder.medium.com/reading-csv-with-jackson-c4e74a15ddc1

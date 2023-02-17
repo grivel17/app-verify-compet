@@ -1,14 +1,16 @@
+package dto;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Competitor {
+public class CompetitorDTO {
     private String name;
     private String surName;
     private int age;
     private String club;
     private String category;
 
-    public Competitor(String name, String surName, int age, String club, String category) {
+    public CompetitorDTO(String name, String surName, int age, String club, String category) {
         this.name = name;
         this.surName = surName;
         this.age = age;
@@ -58,7 +60,7 @@ public class Competitor {
 
     @Override
     public String toString() {
-        return "Competitor{" +
+        return "dto.CompetitorDTO{" +
                 "name='" + name + '\'' +
                 ", surName='" + surName + '\'' +
                 ", age=" + age +
