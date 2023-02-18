@@ -2,10 +2,11 @@ import Helpers.Helpers;
 import dto.CompetitorDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import repository.CompetitorRepository;
 import services.DataRetrieveService;
+import services.DataStoreService;
 
 import java.nio.file.Path;
-import java.time.LocalDate;
 import java.util.List;
 
 public class CompetitorRetriever {
@@ -15,18 +16,16 @@ public class CompetitorRetriever {
 
 
     public static void main(String... args) {
-        LOG.info("Dev mode ....");
+        saveCompetitors(PATH_TO_TEST_CSV);
     }
 
-    private static List<CompetitorDTO> getCompetitorDTOList(String path) {
+    private static List<CompetitorDTO> getCompetitorList(String path) {
         DataRetrieveService dataRetrieveService = new DataRetrieveService(Path.of(path));
-        List<CompetitorDTO> competitorDTOList = dataRetrieveService.getCompetitorsFromCsv();
-        return competitorDTOList;
+        List<CompetitorDTO> competitorList = dataRetrieveService.getCompetitorsFromCsv();
+        return competitorList;
     }
 
-
-    // todo - dodać pustą funkcję, która zapisze  kursy do bazy
-
-    // todo --> do helpera dodaj funkcje sprawdzającą czy nie pusty wkład
-
+    private static void saveCompetitors(String path){
+        LOG.info("Next step send retrieved list to Database {}", getCompetitorList(path));
+    }
 }

@@ -1,4 +1,4 @@
 package domain;
 
-public record Competitor(String name, String surName, int yearOfBirth, String club, String category) {
+public record Competitor(String name, String surname, int yearofbirth, String club, String category) {
 }

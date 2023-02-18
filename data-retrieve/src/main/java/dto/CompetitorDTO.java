@@ -62,7 +62,7 @@ public class CompetitorDTO {
     public String toString() {
         return "dto.CompetitorDTO{" +
                 "name='" + name + '\'' +
-                ", surName='" + surName + '\'' +
+                ", surname='" + surName + '\'' +
                 ", age=" + age +
                 ", club='" + club + '\'' +
                 ", category='" + category + '\'' +

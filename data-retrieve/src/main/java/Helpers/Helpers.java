@@ -12,7 +12,7 @@ public class Helpers {
     public Helpers() {
     }
 
-    public static void ageToYearOfBirth(List<CompetitorDTO> competitorDTOList) {
+    public void ageToYearOfBirth(List<CompetitorDTO> competitorDTOList) {
         competitorDTOList.stream().forEach(c -> c.setAge(CURRENT_YEAR_AS_INT - c.getAge()));
     }
 }
