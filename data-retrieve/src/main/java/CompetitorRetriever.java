@@ -2,6 +2,7 @@ import Helpers.Helpers;
 import dto.CompetitorDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import repository.CompetitorJDBCRepository;
 import repository.CompetitorRepository;
 import services.DataRetrieveService;
 import services.DataStoreService;
@@ -13,10 +14,13 @@ public class CompetitorRetriever {
     private static Logger LOG = LoggerFactory.getLogger(CompetitorRetriever.class);
     public static final String PATH_TO_TEST_CSV = "files/sample-data.csv";
     private static Helpers helpers = new Helpers();
+    public static CompetitorRepository competitorRepository = new CompetitorJDBCRepository("./competitors.db");
 
 
     public static void main(String... args) {
-        saveCompetitors(PATH_TO_TEST_CSV);
+//        saveCompetitors(PATH_TO_TEST_CSV);
+        System.out.println(competitorRepository.getAllCompetitors());
+//        System.out.println(getCompetitorList(PATH_TO_TEST_CSV));
     }
 
     private static List<CompetitorDTO> getCompetitorList(String path) {
@@ -26,6 +30,9 @@ public class CompetitorRetriever {
     }
 
     private static void saveCompetitors(String path){
-        LOG.info("Next step send retrieved list to Database {}", getCompetitorList(path));
+        CompetitorRepository competitorRepository = new CompetitorJDBCRepository("./competitors.db");
+        DataStoreService dataStoreService = new DataStoreService(competitorRepository);
+        dataStoreService.collectAllCompetitors(getCompetitorList(path));
+        LOG.info("Chyba pyknęło..." );
     }
 }

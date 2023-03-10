@@ -20,6 +20,7 @@ public class DataStoreService {
 
     private static Competitor getCompetitor(CompetitorDTO competitorDTO) {
         return new Competitor(
+                competitorDTO.getId(),
                 competitorDTO.getName(),
                 competitorDTO.getSurName(),
                 competitorDTO.getAge(),

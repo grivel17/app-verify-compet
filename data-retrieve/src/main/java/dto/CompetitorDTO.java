@@ -4,19 +4,25 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CompetitorDTO {
+    private String id;
     private String name;
     private String surName;
     private int age;
     private String club;
     private String category;
 
-    public CompetitorDTO(String name, String surName, int age, String club, String category) {
+    public CompetitorDTO(String id, String name, String surName, int age, String club, String category) {
+        this.id = id;
         this.name = name;
         this.surName = surName;
         this.age = age;
         this.club = club;
         this.category = category;
     }
+
+    public String getId() { return id; }
+
+    public void setId(String id) { this.id = id; }
 
     public String getName() {
         return name;
@@ -60,9 +66,10 @@ public class CompetitorDTO {
 
     @Override
     public String toString() {
-        return "dto.CompetitorDTO{" +
-                "name='" + name + '\'' +
-                ", surname='" + surName + '\'' +
+        return "CompetitorDTO{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", surName='" + surName + '\'' +
                 ", age=" + age +
                 ", club='" + club + '\'' +
                 ", category='" + category + '\'' +

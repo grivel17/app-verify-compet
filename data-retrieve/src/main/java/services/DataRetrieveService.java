@@ -31,14 +31,15 @@ public class DataRetrieveService {
 
     private static CompetitorDTO getCompetitor(String line) {
         String[] elements = line.split(";");
-        String name = elements[0];
-        String surName = elements[1];
-        int age = Integer.parseInt(elements[2]);
-        String club = elements[3];
-        String category = elements[4];
-        CompetitorDTO competitorDTO = new CompetitorDTO(name, surName, age, club, category);
+        String id = elements[0];
+        String name = elements[1];
+        String surName = elements[2];
+        int age = Integer.parseInt(elements[3]);
+        String club = elements[4];
+        String category = elements[5];
+        CompetitorDTO competitorDTO = new CompetitorDTO(id, name, surName, age, club, category);
         return competitorDTO;
     }
-    //possible to improve with jackson lib
-    //https://cowtowncoder.medium.com/reading-csv-with-jackson-c4e74a15ddc1
+    // todo possible to improve with jackson lib
+    // todo https://cowtowncoder.medium.com/reading-csv-with-jackson-c4e74a15ddc1
 }
