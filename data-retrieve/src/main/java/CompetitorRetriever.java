@@ -12,15 +12,12 @@ import java.util.List;
 
 public class CompetitorRetriever {
     private static Logger LOG = LoggerFactory.getLogger(CompetitorRetriever.class);
-    public static final String PATH_TO_TEST_CSV = "files/sample-data.csv";
+    private static final String PATH_TO_TEST_CSV = "files/sample-data.csv";
     private static Helpers helpers = new Helpers();
-    public static CompetitorRepository competitorRepository = new CompetitorJDBCRepository("./competitors.db");
-
+    private static CompetitorRepository competitorRepository = new CompetitorJDBCRepository("./competitors.db");
 
     public static void main(String... args) {
-//        saveCompetitors(PATH_TO_TEST_CSV);
-        System.out.println(competitorRepository.getAllCompetitors());
-//        System.out.println(getCompetitorList(PATH_TO_TEST_CSV));
+        saveCompetitors(PATH_TO_TEST_CSV);
     }
 
     private static List<CompetitorDTO> getCompetitorList(String path) {
@@ -33,6 +30,5 @@ public class CompetitorRetriever {
         CompetitorRepository competitorRepository = new CompetitorJDBCRepository("./competitors.db");
         DataStoreService dataStoreService = new DataStoreService(competitorRepository);
         dataStoreService.collectAllCompetitors(getCompetitorList(path));
-        LOG.info("Chyba pyknęło..." );
     }
 }
