@@ -11,10 +11,10 @@ import java.util.List;
 
 public class CompetitorJDBCRepository implements CompetitorRepository {
 
-    public final String H2_DATABASE_SETUP =
+    private static final String H2_DATABASE_SETUP =
             "jdbc:h2:file:%s;AUTO_SERVER=TRUE;INIT=RUNSCRIPT FROM './db_init.sql'";
 
-    public final String INSERT_COMPETITOR_TO_DB = """
+    private static final String INSERT_COMPETITOR_TO_DB = """
             MERGE INTO COMPETITORS (id, name, surname, yearofbirth, club, category)
             VALUES (?, ?, ?, ?, ?, ?)
             """;
@@ -22,7 +22,6 @@ public class CompetitorJDBCRepository implements CompetitorRepository {
     public static final String SQL_REQUEST_GET_ALL = "SELECT * FROM COMPETITORS";
 
     private final DataSource dataSource;
-
 
     public CompetitorJDBCRepository(String dbFile) {
         JdbcDataSource jdbcDataSource = new JdbcDataSource();
@@ -41,12 +40,9 @@ public class CompetitorJDBCRepository implements CompetitorRepository {
             preparedStatement.setString(5, competitor.club());
             preparedStatement.setString(6, competitor.category());
             preparedStatement.execute();
-
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RepositoryException("Can't retrieve and save competitor " + competitor, e);
         }
-
-
     }
 
     @Override
@@ -67,9 +63,8 @@ public class CompetitorJDBCRepository implements CompetitorRepository {
             }
             return Collections.unmodifiableList(competitors);
         } catch (SQLException e) {
-           throw new RuntimeException();
+           throw new RepositoryException("Can't get competitors list", e);
         }
 
     }
 }
-
