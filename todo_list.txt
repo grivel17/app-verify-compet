@@ -1,5 +1,3 @@
-1. dokończ pracę z JDBC
-    - połączenie z bazą danych - ono odbywa się za pośrednictwem obiektu DataBaseSource
-    - do niego ścieżkę ustawia się za pośrednictwem jdbcDataSource.setUrl -> tam pod %s podstawiamy scieżke do bazy
-    - a to się odbędzie po przez konstruktor, który oczekuje stringa z dostępem do bazy
-2. metoda save w jdbc implementowana
+1. first endpoints added
+
+2. make front end installation
